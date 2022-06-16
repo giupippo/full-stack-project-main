@@ -1,0 +1,22 @@
+section {
+    margin-bottom: 2.5rem;
+}
+.card {
+    box-shadow: 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+section.card .card-body {
+    background: white;
+}
+
+@media screen and (min-width: 992px) {
+    .carousel {
+        width: 50%;
+        margin: auto;
+    }
+
+    #video video {
+        width: 50%;
+        margin: auto;
+    }
+}

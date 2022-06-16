@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Un sito un pò barboso</title>
+    <link href="assets/images/barba.png" rel="icon" type="image/png"/>
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link href="assets/css/index.css" rel="stylesheet"/>
+    <script src="assets/js/tizio-barbuto.js"></script>
+</head>
+
+<body>
+
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Un sito un pò barboso</a>
+        <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarNavDropdown" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a aria-current="page" class="nav-link active" href="/organizations.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employees.html">Employees</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="navbarDropdownMenuLink" role="button">
+                        Dropdown link
+                    </a>
+                    <ul aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="d-flex" id="app">
+    <!-- Sidebar-->
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;min-height: 90vh">
+        <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <div class="card bg-dark border-0">
+                <img alt="profile" class="img-fluid rounded-circle" src="https://github.com/mdo.png">
+                <div class="card-body">
+                    <div class="fw-bold text-center h5 mb-2">{{detail.name}}</div>
+                    <blockquote class="card-text fw-bold text-muted text-center">
+                        Tizio Barbuto
+                    </blockquote>
+                    <blockquote class="card-text fw-bold text-muted text-center">
+                        La barba prima di tutto
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto" id="sidebar-links">
+            <li class="nav-item">
+                <a class="nav-link text-white active" href="#about">
+                    Chi sono
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#esperienze">
+                    Esperienze
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#formazione">
+                    Formazione
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#competenze">
+                    Competenze
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#lingue">
+                    Lingue
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#progetti">
+                    Progetti
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#hobby">
+                    Progetti
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#documenti">
+                    Progetti
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#foto">
+                    Foto
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#video">
+                    Video
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#audio">
+                    Audio
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Main-->
+    <main class="mx-4 mt-4">
+
+        <!-- ======= About Section ======= -->
+        <section class="card" id="about">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-user text-danger me-2"></i> Chi sono</h5>
+                <p class="fst-italic">
+                    {{detail.about}}
+                </p>
+                <div class="card my-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Dati anagrafici</h5>
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <dl class="row">
+                                    <dt class="col-sm-3">Birthday</dt>
+                                    <dd class="col-sm-9">{{formatDate(detail.birthdate)}}</dd>
+
+                                    <dt class="col-sm-3">Website</dt>
+                                    <dd class="col-sm-9">{{detail.website}}</dd>
+
+                                    <dt class="col-sm-3">Phone</dt>
+                                    <dd class="col-sm-9">{{detail.phone}}</dd>
+
+                                    <dt class="col-sm-3">City</dt>
+                                    <dd class="col-sm-9">{{detail.city}}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-6">
+                                <dl class="row">
+                                    <dt class="col-sm-3">Age</dt>
+                                    <dd class="col-sm-9">{{detail.age}}</dd>
+
+                                    <dt class="col-sm-3">Degree</dt>
+                                    <dd class="col-sm-9">{{detail.degree}}</dd>
+
+                                    <dt class="col-sm-3">Job</dt>
+                                    <dd class="col-sm-9">{{detail.job}}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="card-title"><i class="fa-solid fa-quote-left text-danger me-2"></i> Citazione</h5>
+                <cite class="mt-4">
+                    Che barba che noia, che noia che barba
+                </cite>
+                <cite class="mt-2 d-block">
+                    {{detail.citation}}
+                </cite>
+            </div>
+        </section>
+
+        <!-- ======= Esperienze lavorative ======= -->
+        <section class="card" id="esperienze">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-briefcase text-danger me-2"></i>
+                    Esperienze lavorative
+                </h5>
+
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>Barbiere per uomo</b></h5>
+                    <h6 class="text-success"><i class="fa-solid fa-calendar-days me-2"></i>Jan 2022 - <span
+                            class="badge bg-success">Current</span></h6>
+                    <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est
+                        reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure,
+                        iste.</p>
+                    <hr>
+                </div>
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>Barbiere per donne</b></h5>
+                    <h6 class="text-success"><i class="fa-solid fa-calendar-days me-2"></i>Jan 2020</h6>
+                    <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est
+                        reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure,
+                        iste.</p>
+                    <hr>
+                </div>
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>Barbiere per bambini</b></h5>
+                    <h6 class="text-success"><i class="fa-solid fa-calendar-days me-2"></i>Jan 2015</h6>
+                    <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est
+                        reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure,
+                        iste.</p>
+                    <hr>
+                </div>
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>Barbiere per animali</b></h5>
+                    <h6 class="text-success"><i class="fa-solid fa-calendar-days me-2"></i>Jan 2010</h6>
+                    <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est
+                        reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure,
+                        iste.</p>
+                    <hr>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Formazione ======= -->
+        <section class="card" id="formazione">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-chalkboard-user text-danger me-2"></i> Formazione
+                </h5>
+
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>Barber College</b></h5>
+                    <h6 class="text-primary"><i class="fa-solid fa-location-dot me-2"></i>Barber College rappresenta
+                        l’Eccellenza in materia di Formazione e Training per Barbieri</h6>
+                    <h6 class="text-success"><i class="fa-solid fa-calendar-days me-2"></i>Jan 2010</h6>
+
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint
+                        consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+                        Quia
+                        fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <hr>
+                </div>
+
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>I Sargassi (Scuola per parrucchieri)</b></h5>
+                    <h6 class="text-primary"><i class="fa-solid fa-location-dot me-2"></i>Via Ottaviano, 6 00192 Roma
+                    </h6>
+                    <h6 class="text-success"><i class="fa-solid fa-calendar-days me-2"></i>Jan 2000</h6>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint
+                        consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+                        Quia
+                        fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <hr>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Competenze ======= -->
+        <section class="card" id="competenze">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-kitchen-set text-danger me-2"></i> Competenze
+                </h5>
+                <div class="table-responsive">
+                    <table aria-describedby="" class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Skill</th>
+                            <th scope="col">Level</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Barber</td>
+                            <td>A+++++++</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>HTML</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>CSS</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>JavaScript</td>
+                            <td>B</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Lingue ======= -->
+        <section class="card" id="lingue">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-language text-danger me-2"></i> Lingue
+                </h5>
+                <div class="table-responsive">
+                    <table aria-describedby="" class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Level</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>English</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Italian</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Spanish</td>
+                            <td>C+</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Progetti ======= -->
+        <section class="card" id="progetti">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-file-shield text-danger me-2"></i> Progetti
+                </h5>
+                <div class="container-fluid mt-4">
+                    <h5 class="fw-bold text-muted"><b>Primo disegno sulla barba a forma di barba</b></h5>
+                    <hr>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Hobby ======= -->
+        <section class="card" id="hobby">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-gamepad text-danger me-2"></i> Hobby
+                </h5>
+                <div class="list-group my-4">
+                    <a aria-current="true" class="list-group-item list-group-item-action" href="#">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Pettinare la barba</h5>
+                        </div>
+                        <p class="mb-1">Pettino la barba ogni 10 minuti</p>
+                        <small>Perchè sono fissato.</small>
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Contare i peli della barba</h5>
+                        </div>
+                        <p class="mb-1">Ogni settimana conto i miei peli della barba</p>
+                        <small class="text-muted">Perchè sono precisino.</small>
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Strizzare l'occhio</h5>
+                        </div>
+                        <p class="mb-1">Come potete vedere dalla foto</p>
+
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Documenti ======= -->
+        <section class="card" id="documenti">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-folder-open text-danger me-2"></i> Documenti
+                </h5>
+                <div class="row my-5">
+                    <div class="col-sm-12 col-md-6 col-xxl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="text-danger flex-shrink-0 me-5 align-self-center">
+                                        <i class="fa-solid fa-file-pdf fa-2xl"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="card-title mb-1">Carta d'intentità</h5>
+                                        <p class="text-muted">Che descrizione devo mettere?</p>
+                                        <a class="btn btn-sm btn-success" href="#"> <i
+                                                class="fa-solid fa-download me-2"></i>
+                                            DOWNLOAD </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xxl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="text-danger flex-shrink-0 me-5 align-self-center">
+                                        <i class="fa-solid fa-file-signature fa-2xl"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="card-title mb-1">Attestato da barbiere</h5>
+                                        <p class="text-muted">Attesta che sono barbiere</p>
+                                        <a class="btn btn-sm btn-success"
+                                           href="https://www.maxjobarbershop.it/wp-content/uploads/2015/01/attestati.jpg">
+                                            <i
+                                                    class="fa-solid fa-download me-2"></i>
+                                            DOWNLOAD </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xxl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="text-danger flex-shrink-0 me-5 align-self-center">
+                                        <i class="fa-solid fa-file-pdf fa-2xl"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="card-title mb-1">Manuale giovane barbiere</h5>
+                                        <p class="text-muted">Un manuale per barbieri</p>
+                                        <a class="btn btn-sm btn-success"
+                                           href="https://alessandroskillbarber.it/wp-content/uploads/2020/02/ALESSANDRO-SKILL-BARBER-MAGAZINE-GRATUITO.pdf">
+                                            <i class="fa-solid fa-download me-2"></i>
+                                            DOWNLOAD </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xxl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="text-danger flex-shrink-0 me-5 align-self-center">
+                                        <i class="fa-solid fa-file-image fa-2xl"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="card-title mb-1">Giornaletto barbiere</h5>
+                                        <p class="text-muted">Un giornaletto bello</p>
+                                        <a class="btn btn-sm btn-success"
+                                           href="https://www.tagliacapelliuomo.it/wp-content/uploads/2020/07/tipi-barba-e1595753875445.png">
+                                            <i class="fa-solid fa-download me-2"></i>
+                                            DOWNLOAD </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Foto ======= -->
+        <section class="card" id="foto">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-images text-danger me-2"></i> Foto
+                </h5>
+                <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleControls">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img alt="..." class="d-block w-100"
+                                 src="https://images7.alphacoders.com/714/thumb-1920-714040.jpg">
+                        </div>
+                        <div class="carousel-item">
+                            <img alt="..."
+                                 class="d-block w-100"
+                                 src="data:image/jpeg;base64,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">
+                        </div>
+                        <div class="carousel-item">
+                            <img alt="..."
+                                 class="d-block w-100"
+                                 src="https://www.wallpaperup.com/uploads/wallpapers/2019/01/06/1307335/449359c784928d3d67133266f859c02a.jpg">
+                        </div>
+                        <div class="carousel-item">
+                            <img alt="..."
+                                 class="d-block w-100"
+                                 src="https://media.tenor.com/images/827cb3acde2c272a3800c9da13c99cba/tenor.png">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls"
+                            type="button">
+                        <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls"
+                            type="button">
+                        <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Video ======= -->
+        <section class="card" id="video">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-film text-danger me-2"></i> Video
+                </h5>
+                <div class="text-center">
+                    <video autoplay class="img-fluid" loop muted>
+                        <source src="https://www.macheteshop.it/wp-content/uploads/2020/10/machete_barba_capelli.mp4"
+                                type="video/mp4"/>
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Audio ======= -->
+        <section class="card" id="audio">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-music text-danger me-2"></i> Audio
+                </h5>
+                <audio controls>
+                    <source src="assets/audio/barba.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+    <div class="text-center p-3">
+        <a class="btn btn-primary text-white" href="#"><i class="fa fa-facebook-official"></i></a>
+        <a class="btn btn-danger text-white" href="#"><i class="fa fa-instagram"></i></a>
+    </div>
+</footer>
+<!-- Footer -->
+</body>
+</html>
